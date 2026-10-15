@@ -1,3 +1,3 @@
-// Public configuration only. NEVER put your OpenAI API key here.
-// Example: apiBaseUrl: "https://your-backend.vercel.app"
-window.APP_CONFIG = { apiBaseUrl: "" };
+window.APP_CONFIG = {
+  apiBaseUrl: "https://nextword-peach.vercel.app"
+};
