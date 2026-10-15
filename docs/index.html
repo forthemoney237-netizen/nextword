@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f5f0">
+  <meta name="description" content="Explore five possible next words with estimated likelihood scores, powered by GPT-6 Luna.">
+  <title>Nextword — A little possibility</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%232d4f43'/%3E%3Cpath d='M16 44V20h7l18 24h7V20' fill='none' stroke='%23eff6df' stroke-width='6'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./config.js" defer></script>
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="Nextword home"><span class="brand-mark" aria-hidden="true">n<span>↗</span></span>nextword<span class="brand-dot">.</span></a>
+    <div class="header-right"><span class="model"><i></i>GPT-6 Luna</span><button class="text-button" id="settings-toggle" aria-expanded="false" aria-controls="connection">Connection <span aria-hidden="true">↗</span></button></div>
+  </header>
+  <main>
+    <section id="connection" class="connection" hidden aria-label="Connection settings">
+      <div><h2>Connect your backend</h2><p>Enter your Vercel URL. Your OpenAI key belongs in Vercel’s environment settings.</p></div>
+      <form id="connection-form"><label for="backend-url">Backend URL</label><div class="connection-fields"><input type="url" id="backend-url" placeholder="https://your-backend.vercel.app" autocomplete="url"><button class="small-button" type="submit">Save connection</button></div><p id="connection-status" role="status">Leave blank to use this website’s own backend.</p></form>
+    </section>
+    <section class="intro">
+      <p class="eyebrow"><span></span> A LITTLE POSSIBILITY</p>
+      <h1>Every sentence has<br>a <em>what comes next.</em></h1>
+      <p class="intro-copy">Start a thought. Explore five ways it could continue.</p>
+    </section>
+    <section class="workspace" aria-label="Next word predictor">
+      <div class="editor-panel">
+        <div class="panel-heading"><h2><span class="section-number">01</span> Your starting point</h2><button id="clear" class="text-button">Clear</button></div>
+        <form id="predict-form">
+          <label class="sr-only" for="text">Text to continue</label>
+          <textarea id="text" maxlength="2000" placeholder="The best way to learn is to" spellcheck="true" aria-describedby="input-hint character-count"></textarea>
+          <div class="input-meta"><span id="input-hint">We’ll suggest the next complete word.</span><span id="character-count">0 / 2,000</span></div>
+          <div class="examples"><span>Try a thought</span><button type="button" data-example="0">A new beginning ↗</button><button type="button" data-example="1">A quiet morning ↗</button><button type="button" data-example="2">Keep learning ↗</button></div>
+          <div class="editor-bottom"><fieldset class="mode-switch"><legend class="sr-only">Prediction mode</legend><label><input type="radio" name="mode" value="demo" checked><span>Demo</span></label><label><input type="radio" name="mode" value="live"><span>Live API</span></label></fieldset><button id="predict-button" class="predict-button" type="submit">Preview demo <span aria-hidden="true">↗</span></button></div>
+          <p class="mode-note" id="mode-note">Demo uses three fixed examples. No API calls or charges.</p>
+        </form>
+      </div>
+      <div class="results-panel">
+        <div class="panel-heading"><h2><span class="section-number">02</span> What could follow</h2><span id="result-tag" class="tag">5 POSSIBILITIES</span></div>
+        <div id="error" class="error" role="alert" hidden></div>
+        <div id="empty-state" class="empty-state"><div class="possibility-symbol" aria-hidden="true"><span>↗</span><span>→</span><span>↘</span></div><h3>A thought opens doors.</h3><p>Write something on the left,<br>then see where it might go.</p></div>
+        <div id="results" hidden>
+          <div class="results-table-heading"><span>NEXT WORD</span><span>ESTIMATED SCORE</span></div>
+          <ol id="word-list"></ol>
+          <div class="other-row"><span>All other words</span><span id="other-score"></span></div>
+          <p class="append-hint">Select a word to add it to your text <span aria-hidden="true">↖</span></p>
+        </div>
+        <div id="loading" class="loading" hidden aria-label="Finding possible next words"><span></span><span></span><span></span><span></span><span></span><p>Considering what comes next…</p></div>
+        <p id="result-status" class="sr-only" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+    <section class="explanation"><span class="note-icon" aria-hidden="true">i</span><div><h2>Possibility, with perspective.</h2><p>Scores are model estimates, not measured probabilities. They show how plausible each complete word seems in context. Other words can be possible, too.</p></div><span class="footnote">WORDS, NOT FRAGMENTS.</span></section>
+  </main>
+  <footer><span>nextword<span class="brand-dot">.</span> <span class="footer-note">One word. Many directions.</span></span><span>Built for the curious <span aria-hidden="true">↗</span></span></footer>
+</body>
+</html>
